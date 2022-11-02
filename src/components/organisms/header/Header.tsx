@@ -6,15 +6,29 @@ import Link from "next/link";
 import { StLogo, StMenu, StNav, StHamburger } from "./style";
 
 const Header: React.FC = () => {
-  const [showMenu, setShowMenu] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
   const profileUrl: string = "";
   const router = useRouter();
-  const menuRef = useRef<HTMLUListElement>();
   const path = router.pathname;
 
+  const menuRef = useRef<HTMLUListElement>();
+
   const menuClickHandler = (e: { target: HTMLInputElement }) => {
-    const menuList = Array.from(menuRef!.current!.children);
+    activeClickedList(e);
+    setShowMenu(false);
+  };
+
+  const logoClickHandler = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    router.push("/");
+
+    activeClickedList(e);
+    setShowMenu(false);
+  };
+
+  const activeClickedList = (e: { target: HTMLInputElement }) => {
     const target = e.target.closest("li");
+    const menuList = Array.from(menuRef!.current!.children);
 
     for (const li in menuList) {
       menuList[li]!.classList.remove("active");
@@ -27,24 +41,16 @@ const Header: React.FC = () => {
     }
   };
 
-  const activeCurrentList = (path: string) => {
+  const activePathList = (path: string) => {
     const menuList = Array.from(menuRef!.current!.children);
     menuList.map((li) => {
       if (li.dataset.path === path) li.classList.add("active");
     });
   };
 
-  const logoClickHandler = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    router.push("/");
-    menuClickHandler(e);
-  };
-
   useEffect(() => {
-    activeCurrentList(path);
+    activePathList(path);
   }, []);
-
-  console.log(showMenu);
 
   return (
     <StNav>

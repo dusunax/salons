@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import navMenu from "../../../../public/icons/icon_nav_menu.svg";
 
 export const StNav = styled.nav`
   height: 4rem;
@@ -81,7 +80,7 @@ export const StHamburger = styled.div<{ on: boolean }>`
     display: flex;
     align-items: center;
     cursor: pointer;
-    ${(props) => (props.on ? "opacity: 0.4" : "")}
+    ${(props) => (props.on ? "" : "opacity: 0.4")}
   }
 
   display: none;
