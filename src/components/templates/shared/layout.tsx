@@ -1,6 +1,7 @@
 import React from "react";
 
-import Header from "../components/organisms/header/Header";
+import Header from "../../organisms/header/header";
+import Footer from "../../organisms/footer/footer";
 
 type Props = {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ const Layout: React.FC<Props> = (props) => {
     <>
       <Header />
       <div>{props.children}</div>
+      <Footer />
     </>
   );
 };
