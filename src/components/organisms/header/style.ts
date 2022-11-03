@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 
 export const StNav = styled.nav`
-  height: 4rem;
+  height: 5rem;
 
-  padding: 0 1rem;
+  padding: 0 1.5rem;
 
   display: flex;
   justify-content: space-between;
@@ -15,6 +15,12 @@ export const StNav = styled.nav`
     display: flex;
     gap: 1rem;
   }
+  @media (max-width: 500px) {
+    height: 3.5rem;
+    .profile_img {
+      width: 2rem;
+    }
+  }
 `;
 
 export const StLogo = styled.div<{ profileUrl: string }>`
@@ -22,7 +28,7 @@ export const StLogo = styled.div<{ profileUrl: string }>`
 
   background: url(${(props) => props.profileUrl}) center / cover;
 
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-align: center;
 `;
 

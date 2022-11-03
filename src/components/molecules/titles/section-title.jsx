@@ -1,12 +1,19 @@
+import styled from "@emotion/styled";
+
 import TitleOne from "../../atoms/title/title-h1";
 
 const SectionTitle = (props) => {
+  const { title, text } = props.titleProps;
   return (
     <>
-      <TitleOne>SectionTitle</TitleOne>
-      <p>섹션에 대한 내용</p>
+      <TitleOne>{title}</TitleOne>
+      <StTextContent>{text}</StTextContent>
     </>
   );
 };
 
 export default SectionTitle;
+
+const StTextContent = styled.p`
+  white-space: pre-wrap;
+`;

@@ -86,7 +86,11 @@ const Header: React.FC = () => {
           <li data-path="/about">About</li>
         </StMenu>
 
-        <img src="icons/img_profile_default.svg" alt="프로필 사진" />
+        <img
+          className="profile_img"
+          src="icons/img_profile_default.svg"
+          alt="프로필 사진"
+        />
       </div>
     </StNav>
   );

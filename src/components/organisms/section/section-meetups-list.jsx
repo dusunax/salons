@@ -1,8 +1,8 @@
 import ListTitle from "../../molecules/titles/list-title";
-import MeetupsFiltersCategories from "../../organisms/meetups-filters-categories/-filters-categories";
-import MeetupsList from "../../organisms/meetups-list/meetups-list";
+import MeetupsFiltersCategories from "../meetups-filters-categories/meetups-filters-categories";
+import MeetupsList from "../meetups-list/meetups-list";
 
-const SectionMeetupsList = (props) => {
+const SectionMeetups = (props) => {
   const hasFilter = props.listOption.filter;
   const hasTitle = props.listOption.title;
 
@@ -17,4 +17,4 @@ const SectionMeetupsList = (props) => {
   );
 };
 
-export default SectionMeetupsList;
+export default SectionMeetups;

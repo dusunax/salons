@@ -1,5 +1,5 @@
 const TitleTwo = (props) => {
-  return <h2>TitleTwo</h2>;
+  return <h2>{props.children}</h2>;
 };
 
 export default TitleTwo;
