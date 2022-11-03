@@ -1,12 +1,38 @@
 import Filter from "../../atoms/select/filter-select";
 
 const Filters = (props) => {
-  const filterA = ["안녕", "월드"];
-  const filterB = [0, 1, 2, 3, 4];
+  const locations = [
+    "강남",
+    "건대",
+    "구의",
+    "낙성대",
+    "대학로",
+    "분당/서현",
+    "사당",
+    "삼성",
+    "서울대입구",
+    "선정릉",
+    "신림",
+    "안국",
+    "을지로",
+    "잠실",
+    "합정",
+    "홍대",
+  ];
+  const days = [
+    "월요일",
+    "화요일",
+    "수요일",
+    "목요일",
+    "금요일",
+    "토요일",
+    "일요일",
+  ];
+
   return (
     <>
-      <Filter content={filterA} />
-      <Filter content={filterB} />
+      <Filter content={locations} />
+      <Filter content={days} />
     </>
   );
 };

@@ -1,12 +1,19 @@
+import styled from "@emotion/styled";
 import TitleTwo from "../../atoms/title/title-h2";
 
-const SectionTitle = (props) => {
+const SectionTitle = ({ sectionTitle }) => {
+  const { title, text } = sectionTitle;
   return (
     <>
-      <TitleTwo>ListTitle</TitleTwo>
-      <p>리스트에 대한 내용</p>
+      <TitleTwo>{title}</TitleTwo>
+      <StTextContent>{text}</StTextContent>
     </>
   );
 };
 
 export default SectionTitle;
+
+const StTextContent = styled.p`
+  white-space: pre-wrap;
+  line-height: 1.6;
+`;

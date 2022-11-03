@@ -1,15 +1,14 @@
 import styled from "@emotion/styled";
 
 const Banner = (props) => {
-  const { imageUrl, imageAlt, height } = props.bannerProps;
-  console.log(props.bannerProps);
+  const { imageUrl, height } = props.bannerProps;
 
   return (
     <StBanner
       imageUrl={imageUrl}
       height={height}
       role="figure"
-      aria-aria-label="배너"
+      aria-label="배너"
     />
   );
 };

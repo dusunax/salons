@@ -1,14 +1,24 @@
+import styled from "@emotion/styled";
 import MeetupItem from "../../molecules/item/meetup-item";
 
 const MeetupsList = (props) => {
-  const meetupsList = [0, 0];
+  const meetupsList = [0, 0, 0, 0];
   return (
-    <ul>
+    <StUList>
       {meetupsList.map((meetups) => (
         <MeetupItem />
       ))}
-    </ul>
+    </StUList>
   );
 };
 
 export default MeetupsList;
+
+const StUList = styled.ul`
+  margin-bottom: 1.5rem;
+
+  display: flex;
+  justify-content: space-between;
+  flex-flow: wrap;
+  gap: 1rem;
+`;

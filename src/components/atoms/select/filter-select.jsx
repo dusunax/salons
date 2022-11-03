@@ -8,7 +8,11 @@ const Filter = (props) => {
         {filterList.map((filter) => {
           const filterOption = filter;
           const filterValue = filter;
-          return <option value={filterValue}>{filterOption}</option>;
+          return (
+            <option key={filterValue + filterOption} value={filterValue}>
+              {filterOption}
+            </option>
+          );
         })}
       </select>
     </>

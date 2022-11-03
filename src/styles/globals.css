@@ -21,3 +21,13 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.show_at_sm {
+  display: none;
+}
+
+@media (max-width: 400px) {
+  .show_at_sm {
+    display: block;
+  }
+}

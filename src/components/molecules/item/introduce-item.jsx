@@ -15,6 +15,8 @@ const IntroduceItem = ({ introduce }) => {
   let localeCreatedAt = moment(createdAt).format("M월 D일");
   let localeFromNow = moment(createdAt).fromNow();
 
+  console.log(categoryInfo);
+
   return (
     <StIntroduceItem>
       <div className="wrap">
@@ -23,7 +25,6 @@ const IntroduceItem = ({ introduce }) => {
           <span>{localeFromNow}</span>
         </div>
         <p>{introduction}</p>
-        <br />
       </div>
     </StIntroduceItem>
   );
@@ -32,10 +33,18 @@ const IntroduceItem = ({ introduce }) => {
 export default IntroduceItem;
 
 const StIntroduceItem = styled.li`
-  flex: 0 0 calc(((100% - (1.5rem * 4)) / 4));
+  flex: 0 0 calc(((100% - (1rem * 3)) / 4));
 
   @media (max-width: 700px) {
-    flex: 0 0 calc((100% - 1.5rem) / 2);
+    flex: 0 0 calc((100% - (1rem * 2)) / 3);
+  }
+
+  @media (max-width: 400px) {
+    flex: 0 0 calc((100% - (1rem)) / 2);
+  }
+
+  @media (max-width: 320px) {
+    flex: 0 0 100%;
   }
 
   .wrap {

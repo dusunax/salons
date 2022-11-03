@@ -16,4 +16,5 @@ export default SectionTitle;
 
 const StTextContent = styled.p`
   white-space: pre-wrap;
+  line-height: 1.6;
 `;

@@ -29,7 +29,9 @@ const IntroduceList = (props) => {
   return (
     <StIntroduceList>
       {introduceList.map((introduce) => {
-        return <IntroduceItem key={introduce} introduce={introduce} />;
+        return (
+          <IntroduceItem key={introduce.introduction} introduce={introduce} />
+        );
       })}
     </StIntroduceList>
   );
@@ -39,7 +41,7 @@ export default IntroduceList;
 
 const StIntroduceList = styled.ul`
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
 
   overflow: hidden;
   margin-bottom: 2.5rem;

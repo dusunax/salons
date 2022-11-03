@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import LabelCategory from "../../atoms/label/label-category";
 
 const ItemBodyWrap = (props) => {
@@ -7,17 +8,33 @@ const ItemBodyWrap = (props) => {
     day: "일요일",
     location: "중랑",
   };
+
   return (
-    <div>
+    <StItemBodyWrap>
       <LabelCategory />
 
       <strong>{meetupName}</strong>
 
-      <div>
+      <div className="bottom">
         <span>{date}</span> · <span>{day}</span> · <span>{location}</span>
       </div>
-    </div>
+    </StItemBodyWrap>
   );
 };
 
 export default ItemBodyWrap;
+
+const StItemBodyWrap = styled.div`
+  padding: 0.7rem 0.9rem 1rem;
+
+  .bottom {
+    margin-top: 0.5rem;
+
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 13px;
+
+    color: #666;
+  }
+`;
