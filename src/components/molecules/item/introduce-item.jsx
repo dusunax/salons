@@ -12,7 +12,6 @@ const IntroduceItem = ({ introduce }) => {
   const categoryInfo = categoriesMap.get(salonCategory[0]);
 
   moment.locale("ko");
-  let localeCreatedAt = moment(createdAt).format("M월 D일");
   let localeFromNow = moment(createdAt).fromNow();
 
   return (

@@ -121,7 +121,7 @@ export default function SalonsPage() {
         <SectionTitle titleProps={sectionTitleData} />
 
         {/* 자기소개 */}
-        <SectionIntroduce />
+        {/* <SectionIntroduce /> */}
 
         {/* 모집 중인 모임 */}
         <SectionMeetupsList listOption={listA} />

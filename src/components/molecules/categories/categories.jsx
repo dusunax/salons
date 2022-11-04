@@ -11,7 +11,7 @@ const Categories = (props) => {
   }
 
   const cateAllContent = {
-    name: "TagAll",
+    tag: "TagAll",
     salonCategory: "전체",
     color: "#111",
   };
@@ -29,7 +29,10 @@ const Categories = (props) => {
       </ButtonCategory>
 
       {categories.map((content) => (
-        <ButtonCategory color={content.color}>
+        <ButtonCategory
+          key={content.Categories + content.color}
+          color={content.color}
+        >
           <LabelCategory category={content} />
         </ButtonCategory>
       ))}

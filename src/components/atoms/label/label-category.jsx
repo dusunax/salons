@@ -3,11 +3,11 @@ import * as tagIcons from "../../../../public/icons/TagIcons";
 
 const LabelCategory = ({ category }) => {
   if (!category) return;
-  const { name, salonCategory, color = "#111" } = category;
+  const { tag, salonCategory, color = "#111" } = category;
 
   return (
     <StLabel fillColor={color}>
-      {tagIcons[name]("#111")}
+      {tagIcons[tag]("#111")}
       <span>{salonCategory}</span>
     </StLabel>
   );
@@ -20,7 +20,8 @@ const StLabel = styled.div`
   align-items: center;
   gap: 6px;
 
-  font-size: 0.8rem;
+  font-size: 0.7rem;
+  color: #666;
 
   svg {
     fill: ${(props) => props.fillColor};
