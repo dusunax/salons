@@ -11,7 +11,7 @@ const ButtonCategory = (props) => {
 export default ButtonCategory;
 
 const StButton = styled.button`
-  padding: 0.5rem 0.7rem;
+  padding: 0.4rem 0.7rem;
   margin-bottom: 0.3rem;
   border-radius: 0.5rem;
 

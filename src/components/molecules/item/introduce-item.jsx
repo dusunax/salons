@@ -12,10 +12,7 @@ const IntroduceItem = ({ introduce }) => {
   const categoryInfo = categoriesMap.get(salonCategory[0]);
 
   moment.locale("ko");
-  let localeCreatedAt = moment(createdAt).format("M월 D일");
   let localeFromNow = moment(createdAt).fromNow();
-
-  console.log(categoryInfo);
 
   return (
     <StIntroduceItem>
@@ -48,7 +45,7 @@ const StIntroduceItem = styled.li`
   }
 
   .wrap {
-    height: 100%;
+    height: 10rem;
     padding: 15px;
 
     border-radius: 10px;
@@ -74,5 +71,13 @@ const StIntroduceItem = styled.li`
     line-height: 1.6;
 
     color: #111;
+
+    overflow: hidden;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
   }
 `;

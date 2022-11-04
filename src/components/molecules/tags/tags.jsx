@@ -1,11 +1,11 @@
 import LabelTag from "../../atoms/label/label-tag";
 
-const Tags = (props) => {
-  const tags = ["태그A", "태그B"];
+const Tags = ({ tagList, categoryColor }) => {
+  const tags = tagList;
   return (
     <>
-      {tags.map((content) => (
-        <LabelTag key={content} content={content} />
+      {tags.map((tag) => (
+        <LabelTag key={tag.text} tag={tag} categoryColor={categoryColor} />
       ))}
     </>
   );

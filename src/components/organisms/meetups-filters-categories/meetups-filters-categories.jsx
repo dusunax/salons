@@ -3,7 +3,6 @@ import Categories from "../../molecules/categories/categories";
 import styled from "@emotion/styled";
 
 const MeetupsFiltersCategories = (props) => {
-  const itemCount = 4;
   const filterSoldoutChangeHandler = () => {};
 
   return (
@@ -11,18 +10,17 @@ const MeetupsFiltersCategories = (props) => {
       <Categories />
 
       <StFilterContainer>
-        <span>{itemCount}개의 모임</span>
+        <div className="left">{/* <span>{itemCount}개의 모임</span> */}</div>
 
         <div className="right">
-          <div>
+          <div className="soldout">
             <input
               type="checkbox"
               id="soldout_check"
               onChange={filterSoldoutChangeHandler}
             />
             <label htmlFor="soldout_check">
-              <span>✔</span>
-              마감 모임 제외
+              <span>✔</span> 마감 모임 제외
             </label>
           </div>
           <Filters />
@@ -40,8 +38,31 @@ const StFilterContainer = styled.div`
   display: flex;
   justify-content: space-between;
 
+  .soldout {
+    min-width: 100px;
+    margin-right: 2px;
+
+    font-size: 0.8rem;
+    color: #666;
+
+    display: flex;
+
+    @media (max-width: 400px) {
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+
   .right {
     display: flex;
-    gap: 0.5rem;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+
+    @media (max-width: 400px) {
+      width: 100%;
+      justify-content: space-between;
+    }
   }
 `;
