@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 
 import { categoriesMap } from "../../../theme/category";
 
-const MeetupItem = ({ meetup }) => {
+const MeetupItem = ({ meetup, filterTagList }) => {
   const { title, host, tags, sessions } = meetup;
 
   const salonCategory = tags.salonCategory[0];
@@ -26,7 +26,7 @@ const MeetupItem = ({ meetup }) => {
   return (
     <StList>
       <div className="wrap">
-        <ItemImageWrap imageProps={imageProps} />
+        <ItemImageWrap imageProps={imageProps} filterTagList={filterTagList} />
         <ItemBodyWrap bodyProps={bodyProps} />
       </div>
     </StList>

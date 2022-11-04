@@ -14,7 +14,7 @@ import text_work from "../../../../public/icons/text_work.svg";
 import text_write from "../../../../public/icons/text_write.svg";
 import with_text from "../../../../public/icons/with_text.svg";
 
-const ItemImageWrap = ({ imageProps }) => {
+const ItemImageWrap = ({ imageProps, filterTagList }) => {
   const { host, categoryName, color } = imageProps;
 
   const imageUrl = host.profileImageUrl;
@@ -26,7 +26,7 @@ const ItemImageWrap = ({ imageProps }) => {
   return (
     <StItemImageWrap categoryColor={color}>
       <div className="tag_container">
-        <Tags />
+        <Tags tagList={filterTagList} categoryColor={color} />
       </div>
 
       <div className="image_container">

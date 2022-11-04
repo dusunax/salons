@@ -61,6 +61,7 @@ const StFilterContainer = styled.div`
     gap: 0.6rem;
 
     @media (max-width: 400px) {
+      width: 100%;
       justify-content: space-between;
     }
   }

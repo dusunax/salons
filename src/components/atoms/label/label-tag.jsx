@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 
-const LabelTag = (props) => {
-  const name = props.content;
+const LabelTag = ({ tag, categoryColor }) => {
+  const tagText = tag.text;
+  const tagColor = tag.color ? tag.color : categoryColor;
 
-  return <StLabelTag>{name}</StLabelTag>;
+  return <StLabelTag tagColor={tagColor}>{tagText}</StLabelTag>;
 };
 
 export default LabelTag;
@@ -12,7 +13,7 @@ const StLabelTag = styled.div`
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
 
-  background-color: #111;
+  background-color: ${(props) => props.tagColor};
   color: #fff;
 
   font-size: 0.6rem;
