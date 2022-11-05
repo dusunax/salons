@@ -113,7 +113,7 @@ const StItemImageWrap = styled.div`
   }
 
   .text_image {
-    width: 100%;
+    width: 90%;
 
     position: absolute;
   }
@@ -163,15 +163,13 @@ const StItemImageWrap = styled.div`
 
       background-color: white;
       opacity: 0.2;
+
+      background-color: red;
     }
 
     @media (max-width: 400px) {
       flex-flow: column;
       gap: 0;
-
-      .middle_bar {
-        display: none;
-      }
     }
   }
 `;

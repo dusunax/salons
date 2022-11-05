@@ -5,7 +5,7 @@ import MeetupsList from "../meetups-list/meetups-list";
 const SectionMeetups = ({ listOption, meetupsList }) => {
   const hasFilter = listOption.filterSection;
   const hasTitle = listOption.title !== undefined;
-  const sortOpt = listOption.filterKeyword;
+  const sortOpt = listOption.filterKeywords[0];
 
   return (
     <section>

@@ -5,7 +5,6 @@ const Tags = ({ tagList, categoryColor }) => {
   return (
     <>
       {tags.map((tag) => {
-        if (tag.text === "모집 마감") return;
         return (
           <LabelTag key={tag.text} tag={tag} categoryColor={categoryColor} />
         );

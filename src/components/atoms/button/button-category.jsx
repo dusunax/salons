@@ -2,7 +2,12 @@ import styled from "@emotion/styled";
 
 const ButtonCategory = (props) => {
   return (
-    <StButton color={props.color} active={props.active}>
+    <StButton
+      color={props.color}
+      active={props.active}
+      data-cate={props.dataCate}
+      className={props.active === true ? "active" : ""}
+    >
       {props.children}
     </StButton>
   );
@@ -22,4 +27,15 @@ const StButton = styled.button`
   background-color: ${(props) => (props.active ? props.color : "#fff")};
   color: ${(props) => (props.active ? "#fff !important" : "#666")};
   font-weight: ${(props) => (props.active ? "500" : "400")};
+
+  &.active {
+    background-color: ${(props) => props.color};
+
+    svg {
+      fill: #fff;
+    }
+    span {
+      color: #fff !important;
+    }
+  }
 `;

@@ -32,11 +32,11 @@ export default function SalonsPage() {
   const [meetupsList, setMeetupsList] = useState([]);
 
   const listOptionA = {
-    filterKeyword: "closedMeetup",
+    filterKeywords: ["closedMeetup"],
     filterSection: true,
   };
   const listOptionB = {
-    filterKeyword: "openMeetup",
+    filterKeywords: ["openMeetup"],
     filterSection: false,
     ...sectionMiddleData,
   };
