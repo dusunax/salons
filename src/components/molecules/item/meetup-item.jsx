@@ -2,17 +2,17 @@ import ItemImageWrap from "../item-contents-wrap/item-image-wrap";
 import ItemBodyWrap from "../item-contents-wrap/item-body-wrap";
 import styled from "@emotion/styled";
 
-import { categoriesMap } from "../../../theme/category";
+import { categoriesMap } from "../../../utils/category";
 
 const MeetupItem = ({ meetup, filterTagList }) => {
-  const { title, host, tags, sessions } = meetup;
+  const { title, host, tags, sessions, sortStrings } = meetup;
 
   const salonCategory = tags.salonCategory[0];
   const selectedCategory = categoriesMap.get(salonCategory);
 
   const { name: categoryName, color, tag } = selectedCategory;
 
-  const imageProps = { host, categoryName, color };
+  const imageProps = { host, categoryName, color, sortStrings };
   const bodyProps = {
     title,
     tags,
@@ -51,12 +51,13 @@ const StList = styled.li`
 
   .wrap {
     height: 100%;
+    border-radius: 10px;
 
     display: flex;
     flex-flow: column;
 
-    border-radius: 10px;
     border: 1px solid #dadce0;
+    background-color: #fff;
 
     box-sizing: border-box;
   }

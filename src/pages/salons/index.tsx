@@ -1,4 +1,9 @@
+import { useEffect, useState, useCallback, useRef } from "react";
 import Head from "next/head";
+
+import { API_URL } from "../../config/index";
+import { filteringMeetup } from "../../utils/meetupFilter";
+import { categoriesMap } from "../../utils/category";
 
 import SectionMeetupsList from "../../components/organisms/section/section-meetups-list";
 import SectionIntroduce from "../../components/organisms/section/section-introduces";
@@ -25,89 +30,149 @@ const sectionMiddleData = {
 };
 
 export default function SalonsPage() {
-  const listA = {
-    filter: true,
-    title: "",
-    list: [
-      {
-        id: 9,
-        title: "모임 제목",
-        host: {
-          id: 99,
-          profileImageUrl: "url주소",
-          name: "이름",
-          nickname: "닉네임",
-          introduction: "회원 소개글",
-          title: "회원 제목",
-          instagramAccount: "",
-          favortieMovie: "",
-          email: "",
-          phoneNumber: "",
-          gender: "",
-          birthday: "",
-          serivcePolicyConsent: "",
-          privacyPolicyConsent: "",
-          marketingConsent: "",
-          pointBalance: "",
-        },
-        thumbnailUrl: "",
-        briefLocation: "위치",
-        summary: "",
-        openingDate: "2022-11-02T12:00:00+09:00",
-        closingDate: "",
-        createdAt: "2022-11-02T12:00:00+09:00",
-        type: 1,
-        attendeeCount: 0,
-        maxCapacity: 12,
-        price: 198000,
-        discountPrice: null,
-        tags: {
-          dayOfWeek: ["일요일"],
-          salonCategory: ["영화와 넷플릭스"],
-          region: ["홍대"],
-          season: [
-            "7", // string입니다
-          ],
-          homeCuration: ["영화"],
-          keyword: ["밤새도록영화이야기", "영화제100%즐기기"],
-        },
-        soldOut: "",
-        comment: "",
-        description: "",
-        minCapacity: "",
-        femaleCapacity: "",
-        femaleCount: "",
-        maleCapacity: "",
-        maleCount: "",
-        applyUrl: "",
-        sessions: [
-          {
-            id: 99,
-            palce: {
-              id: 99,
-              thumbnailUrl: "섬네일 url",
-              name: "위치 이름",
-              address: "위치 주소",
-              introduction: "주소 소개",
-            },
-            order: 99,
-            date: "2022-11-02T12:00:00+09:00",
-            duration: 180,
-            online: true,
-            title: "",
-            curriculum: "",
-          },
-        ],
-        contents: [],
-        extralmageUrl: [],
-        additionalInformation: {
-          memberLed: true,
-        },
-        openChatUrl: "",
-      },
-    ],
+  const [meetupsList, setMeetupsList] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [filterSelected, setFilterSelected] = useState({
+    closed: false,
+    location: null,
+    day: null,
+  });
+  const meetupsUList = useRef();
+  const [listEmpty, setListEmpty] = useState(false);
+
+  const listOptionA = {
+    filterKeywords: ["closedMeetup"],
+    filterSection: true,
   };
-  const listB = { filter: false, title: "제목", list: [] };
+  const listOptionB = {
+    filterKeywords: ["openMeetup"],
+    filterSection: false,
+    ...sectionMiddleData,
+  };
+
+  const fetchMeetupsList = async () => {
+    try {
+      let response = await fetch(API_URL + "/meetups").then((res) =>
+        res.json()
+      );
+
+      if (response.success) {
+        const fetchedList = response.data.meetups;
+        return fetchedList;
+      }
+    } catch (e) {
+      console.log(e);
+      return [];
+    }
+  };
+
+  const addFilter = (fetchedList) => {
+    for (const x in fetchedList) {
+      let sortTags;
+      let sortStrings = [];
+
+      sortTags = filteringMeetup(fetchedList[x]);
+      fetchedList[x]["filter"] = filteringMeetup(fetchedList[x]);
+
+      for (const idx in sortTags) {
+        sortStrings.push(sortTags[idx].text);
+      }
+      fetchedList[x]["sortStrings"] = sortStrings;
+    }
+
+    return fetchedList;
+  };
+
+  const fetchHandler = async () => {
+    const crruentList = await fetchMeetupsList();
+    const addFilterList = await addFilter(crruentList);
+    setMeetupsList(addFilterList);
+  };
+
+  const getCategories = useCallback(() => {
+    let cateLists = [
+      {
+        name: "all",
+        tag: "TagAll",
+        salonCategory: "전체",
+        color: "#111",
+        active: true,
+        category: "categoryAll",
+      },
+    ];
+
+    for (const cate of categoriesMap) {
+      cateLists.push({ ...cate[1], active: false });
+    }
+    setCategories(cateLists);
+  }, [categoriesMap]);
+
+  const buttonClickHandler = (e) => {
+    const target = e.target.closest("button");
+
+    if (target) {
+      const cate = target.dataset.cate;
+      filterControl(cate);
+    }
+  };
+
+  const filterControl = (cate) => {
+    const newList = [...categories];
+    let allActives = newList[0].active;
+
+    for (const ct in newList) {
+      const current = newList[ct];
+      if (cate === "TagAll") {
+        current.active = allActives;
+      } else {
+        newList[0].active = false;
+      }
+
+      if (current.tag === cate) {
+        current.active = !current.active;
+      }
+
+      setCategories(newList);
+    }
+  };
+
+  const selectChangeHandler = (e) => {
+    if (e.target.name === "locations") {
+      setFilterSelected({ ...filterSelected, location: e.target.value });
+    } else if (e.target.name === "days") {
+      setFilterSelected({ ...filterSelected, day: e.target.value });
+    }
+  };
+
+  const checkboxChangeHandler = (e) => {
+    setFilterSelected({ ...filterSelected, closed: e.target.checked });
+  };
+
+  const checkItemsLength = () => {
+    if (meetupsUList.current.children.length === 0) {
+      setListEmpty(true);
+    } else {
+      setListEmpty(false);
+    }
+  };
+
+  const handlerProps = {
+    checkboxChangeHandler,
+    selectChangeHandler,
+    buttonClickHandler,
+  };
+
+  const filterProps = {
+    categories,
+    filterSelected,
+    meetupsUList,
+    listEmpty,
+  };
+
+  useEffect(() => {
+    fetchHandler();
+    getCategories();
+  }, []);
 
   return (
     <div>
@@ -121,15 +186,22 @@ export default function SalonsPage() {
         <SectionTitle titleProps={sectionTitleData} />
 
         {/* 자기소개 */}
-        <SectionIntroduce />
+        {/* <SectionIntroduce /> */}
 
         {/* 모집 중인 모임 */}
-        <SectionMeetupsList listOption={listA} />
+        <SectionMeetupsList
+          listOption={listOptionA}
+          meetupsList={meetupsList}
+          handlerProps={handlerProps}
+          filterProps={filterProps}
+        />
 
         {/* 진행 중인 모임 */}
         <SectionMeetupsList
-          listOption={listB}
-          sectionTitle={sectionMiddleData}
+          listOption={listOptionB}
+          meetupsList={meetupsList}
+          handlerProps={handlerProps}
+          filterProps={filterProps}
         />
       </ContentsWrap>
     </div>

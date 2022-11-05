@@ -1,41 +1,25 @@
 import ButtonCategory from "../../atoms/button/button-category";
 import LabelCategory from "../../atoms/label/label-category";
 
-import { categoriesMap } from "../../../theme/category";
 import styled from "@emotion/styled";
 
 const Categories = (props) => {
-  let categories = [];
-  for (const cate of categoriesMap) {
-    categories.push(cate[1]);
-  }
-
-  const cateAllContent = {
-    tag: "TagAll",
-    salonCategory: "전체",
-    color: "#111",
-  };
-
-  const buttonContainerClickHandler = () => {
-    // 버튼 Toggle
-    // ButtonCategory의 props "active"
-    // SVG에 addClass "active"
-  };
+  const { buttonClickHandler, categories } = props;
 
   return (
-    <StButtonContainer onClick={buttonContainerClickHandler}>
-      <ButtonCategory color={"#111"} active={false}>
-        <LabelCategory category={cateAllContent} />
-      </ButtonCategory>
-
-      {categories.map((content) => (
-        <ButtonCategory
-          key={content.Categories + content.color}
-          color={content.color}
-        >
-          <LabelCategory category={content} />
-        </ButtonCategory>
-      ))}
+    <StButtonContainer onClick={buttonClickHandler}>
+      {categories.map((content, idx) => {
+        return (
+          <ButtonCategory
+            key={content.category + content.color}
+            color={content.color}
+            dataCate={content.tag}
+            active={content.active}
+          >
+            <LabelCategory category={content} />
+          </ButtonCategory>
+        );
+      })}
     </StButtonContainer>
   );
 };
