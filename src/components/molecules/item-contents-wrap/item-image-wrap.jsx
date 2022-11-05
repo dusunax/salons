@@ -15,7 +15,7 @@ import text_write from "../../../../public/icons/text_write.svg";
 import with_text from "../../../../public/icons/with_text.svg";
 
 const ItemImageWrap = ({ imageProps, filterTagList }) => {
-  const { host, categoryName, color } = imageProps;
+  const { host, categoryName, color, sortStrings } = imageProps;
 
   const imageUrl = host.profileImageUrl;
   const imageAlt = host.introduction;
@@ -23,8 +23,10 @@ const ItemImageWrap = ({ imageProps, filterTagList }) => {
   const name = host.nickname;
   const intro = host.title;
 
+  const isclosed = sortStrings.includes("모집 마감");
+
   return (
-    <StItemImageWrap categoryColor={color}>
+    <StItemImageWrap isclosed={isclosed} categoryColor={color}>
       <div className="tag_container">
         <Tags tagList={filterTagList} categoryColor={color} />
       </div>
@@ -40,9 +42,11 @@ const ItemImageWrap = ({ imageProps, filterTagList }) => {
 
       {hasBanner && (
         <div className="banner_container">
-          <span>{name}</span>
-          <div className="middle_bar" />
-          <span>{intro}</span>
+          <div className="contents_area">
+            {name}
+            <span className="middle_bar" />
+            {intro}
+          </div>
         </div>
       )}
     </StItemImageWrap>
@@ -67,6 +71,18 @@ const StItemImageWrap = styled.div`
 
     background-color: ${(props) => props.categoryColor};
     opacity: 0.1;
+  }
+
+  ::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    z-index: 9;
+
+    background-color: ${(props) =>
+      props.isclosed ? `rgba(0, 0, 0, 0.3)` : ""};
   }
 
   .image_container,
@@ -107,7 +123,7 @@ const StItemImageWrap = styled.div`
 
     position: absolute;
     top: 0;
-    z-index: 9;
+    z-index: 99;
 
     gap: 0.4rem;
   }
@@ -124,12 +140,26 @@ const StItemImageWrap = styled.div`
 
     font-size: 9px;
     font-weight: 600;
+    text-align: center;
+
+    .contents_area {
+      overflow: hidden;
+      word-wrap: break-word;
+      text-overflow: ellipsis;
+
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+    }
 
     .middle_bar {
+      display: inline-block;
+
       width: 1px;
       height: 10px;
 
-      margin: 2px 0.3rem;
+      margin: 0.1rem 0.3rem;
+      transform: translateY(4px);
 
       background-color: white;
       opacity: 0.2;

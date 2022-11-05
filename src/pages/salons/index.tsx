@@ -1,4 +1,8 @@
+import { useEffect, useState } from "react";
 import Head from "next/head";
+
+import { API_URL } from "../../config/index";
+import { filteringMeetup } from "../../utils/meetupFilter";
 
 import SectionMeetupsList from "../../components/organisms/section/section-meetups-list";
 import SectionIntroduce from "../../components/organisms/section/section-introduces";
@@ -25,89 +29,60 @@ const sectionMiddleData = {
 };
 
 export default function SalonsPage() {
-  const listA = {
-    filter: true,
-    title: "",
-    list: [
-      {
-        id: 9,
-        title: "모임 제목",
-        host: {
-          id: 99,
-          profileImageUrl: "url주소",
-          name: "이름",
-          nickname: "닉네임",
-          introduction: "회원 소개글",
-          title: "회원 제목",
-          instagramAccount: "",
-          favortieMovie: "",
-          email: "",
-          phoneNumber: "",
-          gender: "",
-          birthday: "",
-          serivcePolicyConsent: "",
-          privacyPolicyConsent: "",
-          marketingConsent: "",
-          pointBalance: "",
-        },
-        thumbnailUrl: "",
-        briefLocation: "위치",
-        summary: "",
-        openingDate: "2022-11-02T12:00:00+09:00",
-        closingDate: "",
-        createdAt: "2022-11-02T12:00:00+09:00",
-        type: 1,
-        attendeeCount: 0,
-        maxCapacity: 12,
-        price: 198000,
-        discountPrice: null,
-        tags: {
-          dayOfWeek: ["일요일"],
-          salonCategory: ["영화와 넷플릭스"],
-          region: ["홍대"],
-          season: [
-            "7", // string입니다
-          ],
-          homeCuration: ["영화"],
-          keyword: ["밤새도록영화이야기", "영화제100%즐기기"],
-        },
-        soldOut: "",
-        comment: "",
-        description: "",
-        minCapacity: "",
-        femaleCapacity: "",
-        femaleCount: "",
-        maleCapacity: "",
-        maleCount: "",
-        applyUrl: "",
-        sessions: [
-          {
-            id: 99,
-            palce: {
-              id: 99,
-              thumbnailUrl: "섬네일 url",
-              name: "위치 이름",
-              address: "위치 주소",
-              introduction: "주소 소개",
-            },
-            order: 99,
-            date: "2022-11-02T12:00:00+09:00",
-            duration: 180,
-            online: true,
-            title: "",
-            curriculum: "",
-          },
-        ],
-        contents: [],
-        extralmageUrl: [],
-        additionalInformation: {
-          memberLed: true,
-        },
-        openChatUrl: "",
-      },
-    ],
+  const [meetupsList, setMeetupsList] = useState([]);
+
+  const listOptionA = {
+    filterKeyword: "closedMeetup",
+    filterSection: true,
   };
-  const listB = { filter: false, title: "제목", list: [] };
+  const listOptionB = {
+    filterKeyword: "openMeetup",
+    filterSection: false,
+    ...sectionMiddleData,
+  };
+
+  const fetchMeetupsList = async () => {
+    try {
+      let response = await fetch(API_URL + "/meetups").then((res) =>
+        res.json()
+      );
+
+      if (response.success) {
+        const fetchedList = response.data.meetups;
+        return fetchedList;
+      }
+    } catch (e) {
+      console.log(e);
+      return [];
+    }
+  };
+
+  const addFilter = (fetchedList) => {
+    for (const x in fetchedList) {
+      let sortTags;
+      let sortStrings = [];
+
+      sortTags = filteringMeetup(fetchedList[x]);
+      fetchedList[x]["filter"] = filteringMeetup(fetchedList[x]);
+
+      for (const idx in sortTags) {
+        sortStrings.push(sortTags[idx].text);
+      }
+      fetchedList[x]["sortStrings"] = sortStrings;
+    }
+
+    return fetchedList;
+  };
+
+  const fetchHandler = async () => {
+    const crruentList = await fetchMeetupsList();
+    const addFilterList = await addFilter(crruentList);
+    setMeetupsList(addFilterList);
+  };
+
+  useEffect(() => {
+    fetchHandler();
+  }, []);
 
   return (
     <div>
@@ -121,15 +96,18 @@ export default function SalonsPage() {
         <SectionTitle titleProps={sectionTitleData} />
 
         {/* 자기소개 */}
-        <SectionIntroduce />
+        {/* <SectionIntroduce /> */}
 
         {/* 모집 중인 모임 */}
-        <SectionMeetupsList listOption={listA} />
+        <SectionMeetupsList
+          listOption={listOptionA}
+          meetupsList={meetupsList}
+        />
 
         {/* 진행 중인 모임 */}
         <SectionMeetupsList
-          listOption={listB}
-          sectionTitle={sectionMiddleData}
+          listOption={listOptionB}
+          meetupsList={meetupsList}
         />
       </ContentsWrap>
     </div>

@@ -5,7 +5,7 @@ import "moment/locale/ko";
 
 import LabelCategory from "../../atoms/label/label-category";
 
-import { categoriesMap } from "../../../theme/category";
+import { categoriesMap } from "../../../utils/category";
 
 const IntroduceItem = ({ introduce }) => {
   let { introduction, salonCategory, createdAt } = introduce;

@@ -1,7 +1,7 @@
 import ButtonCategory from "../../atoms/button/button-category";
 import LabelCategory from "../../atoms/label/label-category";
 
-import { categoriesMap } from "../../../theme/category";
+import { categoriesMap } from "../../../utils/category";
 import styled from "@emotion/styled";
 
 const Categories = (props) => {

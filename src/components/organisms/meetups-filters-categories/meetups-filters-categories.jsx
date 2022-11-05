@@ -1,6 +1,9 @@
+import { memo } from "react";
+
+import styled from "@emotion/styled";
+
 import Filters from "../../molecules/filters/filters";
 import Categories from "../../molecules/categories/categories";
-import styled from "@emotion/styled";
 
 const MeetupsFiltersCategories = (props) => {
   const filterSoldoutChangeHandler = () => {};
@@ -30,7 +33,7 @@ const MeetupsFiltersCategories = (props) => {
   );
 };
 
-export default MeetupsFiltersCategories;
+export default memo(MeetupsFiltersCategories);
 
 const StFilterContainer = styled.div`
   margin: 0.8rem 0 1rem;
