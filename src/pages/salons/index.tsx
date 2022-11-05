@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import Head from "next/head";
 
 import { API_URL } from "../../config/index";
 import { filteringMeetup } from "../../utils/meetupFilter";
+import { categoriesMap } from "../../utils/category";
 
 import SectionMeetupsList from "../../components/organisms/section/section-meetups-list";
 import SectionIntroduce from "../../components/organisms/section/section-introduces";
@@ -30,6 +31,14 @@ const sectionMiddleData = {
 
 export default function SalonsPage() {
   const [meetupsList, setMeetupsList] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [filterSelected, setFilterSelected] = useState({
+    closed: false,
+    location: null,
+    day: null,
+  });
+  const meetupsUList = useRef();
+  const [listEmpty, setListEmpty] = useState(false);
 
   const listOptionA = {
     filterKeywords: ["closedMeetup"],
@@ -80,8 +89,89 @@ export default function SalonsPage() {
     setMeetupsList(addFilterList);
   };
 
+  const getCategories = useCallback(() => {
+    let cateLists = [
+      {
+        name: "all",
+        tag: "TagAll",
+        salonCategory: "전체",
+        color: "#111",
+        active: true,
+        category: "categoryAll",
+      },
+    ];
+
+    for (const cate of categoriesMap) {
+      cateLists.push({ ...cate[1], active: false });
+    }
+    setCategories(cateLists);
+  }, [categoriesMap]);
+
+  const buttonClickHandler = (e) => {
+    const target = e.target.closest("button");
+
+    if (target) {
+      const cate = target.dataset.cate;
+      filterControl(cate);
+    }
+  };
+
+  const filterControl = (cate) => {
+    const newList = [...categories];
+    let allActives = newList[0].active;
+
+    for (const ct in newList) {
+      const current = newList[ct];
+      if (cate === "TagAll") {
+        current.active = allActives;
+      } else {
+        newList[0].active = false;
+      }
+
+      if (current.tag === cate) {
+        current.active = !current.active;
+      }
+
+      setCategories(newList);
+    }
+  };
+
+  const selectChangeHandler = (e) => {
+    if (e.target.name === "locations") {
+      setFilterSelected({ ...filterSelected, location: e.target.value });
+    } else if (e.target.name === "days") {
+      setFilterSelected({ ...filterSelected, day: e.target.value });
+    }
+  };
+
+  const checkboxChangeHandler = (e) => {
+    setFilterSelected({ ...filterSelected, closed: e.target.checked });
+  };
+
+  const checkItemsLength = () => {
+    if (meetupsUList.current.children.length === 0) {
+      setListEmpty(true);
+    } else {
+      setListEmpty(false);
+    }
+  };
+
+  const handlerProps = {
+    checkboxChangeHandler,
+    selectChangeHandler,
+    buttonClickHandler,
+  };
+
+  const filterProps = {
+    categories,
+    filterSelected,
+    meetupsUList,
+    listEmpty,
+  };
+
   useEffect(() => {
     fetchHandler();
+    getCategories();
   }, []);
 
   return (
@@ -102,12 +192,16 @@ export default function SalonsPage() {
         <SectionMeetupsList
           listOption={listOptionA}
           meetupsList={meetupsList}
+          handlerProps={handlerProps}
+          filterProps={filterProps}
         />
 
         {/* 진행 중인 모임 */}
         <SectionMeetupsList
           listOption={listOptionB}
           meetupsList={meetupsList}
+          handlerProps={handlerProps}
+          filterProps={filterProps}
         />
       </ContentsWrap>
     </div>

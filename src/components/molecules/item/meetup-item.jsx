@@ -51,12 +51,13 @@ const StList = styled.li`
 
   .wrap {
     height: 100%;
+    border-radius: 10px;
 
     display: flex;
     flex-flow: column;
 
-    border-radius: 10px;
     border: 1px solid #dadce0;
+    background-color: #fff;
 
     box-sizing: border-box;
   }

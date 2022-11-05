@@ -1,10 +1,11 @@
 import styled from "@emotion/styled";
 
-const Filter = ({ content, selectChangeHandler, name }) => {
+const Filter = ({ content, selectChangeHandler, name, placeholder }) => {
   const filterList = content;
 
   return (
     <StSelect name={name} id={name + "Select"} onChange={selectChangeHandler}>
+      <option value="none">{placeholder}</option>
       {filterList.map((filter) => {
         const filterOption = filter;
         const filterValue = filter;

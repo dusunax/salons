@@ -7,11 +7,13 @@ const Filters = ({ selectChangeHandler }) => {
     <>
       <Filter
         name={"locations"}
+        placeholder={"위치"}
         content={locations}
         selectChangeHandler={selectChangeHandler}
       />
       <Filter
         name={"days"}
+        placeholder={"요일"}
         content={days}
         selectChangeHandler={selectChangeHandler}
       />

@@ -67,7 +67,7 @@ const StItemImageWrap = styled.div`
     height: 100%;
 
     position: absolute;
-    z-index: -1;
+    z-index: 0;
 
     background-color: ${(props) => props.categoryColor};
     opacity: 0.1;
