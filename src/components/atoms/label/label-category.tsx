@@ -3,9 +3,9 @@ import * as tagIcons from "../../../../public/icons/TagIcons";
 
 import { Category } from "../../../models/category";
 
-const LabelCategory = ({ category }) => {
+const LabelCategory = ({ category }: { category: Category }) => {
   if (!category) return;
-  const { tag, salonCategory, color = "#111" }: Category = category;
+  const { tag, salonCategory, color = "#111" } = category;
 
   return (
     <StLabel fillColor={color}>

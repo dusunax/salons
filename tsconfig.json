@@ -19,8 +19,10 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/utils/category.js",
+    "src/utils/category.ts",
     "src/utils/meetupFilter.js",
+    "src/components/molecules/categories/categories.jsx",
+    "src/components/molecules/item/introduce-item.jsx",
     "src/components/atoms/label/label-category.jsx"
   ],
   "exclude": ["node_modules"]

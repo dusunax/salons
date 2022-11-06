@@ -14,7 +14,15 @@ import text_work from "../../../../public/icons/text_work.svg";
 import text_write from "../../../../public/icons/text_write.svg";
 import with_text from "../../../../public/icons/with_text.svg";
 
-const ItemImageWrap = ({ imageProps, filterTagList }) => {
+import { Tag, ImageProps } from "../../../models/modules";
+
+const ItemImageWrap = ({
+  imageProps,
+  filterTagList,
+}: {
+  imageProps: ImageProps;
+  filterTagList: Tag[];
+}) => {
   const { host, categoryName, color, sortStrings } = imageProps;
 
   const imageUrl = host?.profileImageUrl;
@@ -55,7 +63,10 @@ const ItemImageWrap = ({ imageProps, filterTagList }) => {
 
 export default ItemImageWrap;
 
-const StItemImageWrap = styled.div`
+const StItemImageWrap = styled.div<{
+  isclosed: boolean;
+  categoryColor: string;
+}>`
   position: relative;
 
   display: flex;

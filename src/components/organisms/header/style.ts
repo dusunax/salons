@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 
 export const StNav = styled.nav`
   height: 5rem;
-
   padding: 0 1.5rem;
 
   display: flex;
@@ -10,6 +9,8 @@ export const StNav = styled.nav`
   align-items: center;
 
   position: relative;
+
+  border-bottom: 1px solid #eee;
 
   .right {
     display: flex;

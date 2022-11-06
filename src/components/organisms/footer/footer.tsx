@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-const Footer = (props) => {
+const Footer = () => {
   return <Stfooter className="footer"></Stfooter>;
 };
 
