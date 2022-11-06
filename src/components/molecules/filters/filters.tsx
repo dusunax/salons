@@ -2,7 +2,11 @@ import Filter from "../../atoms/select/filter-select";
 
 import { locations, days } from "../../../utils/filter";
 
-const Filters = ({ selectChangeHandler }) => {
+const Filters = ({
+  selectChangeHandler,
+}: {
+  selectChangeHandler: () => void;
+}) => {
   return (
     <>
       <Filter

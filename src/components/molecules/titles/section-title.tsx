@@ -2,8 +2,10 @@ import styled from "@emotion/styled";
 
 import TitleOne from "../../atoms/title/title-h1";
 
-const SectionTitle = (props) => {
-  const { title, text } = props.titleProps;
+import { SectionTitle as SectionTitleType } from "../../../models/section-title";
+
+const SectionTitle = ({ titleProps }: { titleProps: SectionTitleType }) => {
+  const { title, text } = titleProps;
   return (
     <>
       <TitleOne>{title}</TitleOne>

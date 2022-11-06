@@ -6,7 +6,7 @@ const Filter = ({
   name,
   placeholder,
 }: {
-  content: [];
+  content: string[];
   selectChangeHandler: () => void;
   name: string;
   placeholder: string;

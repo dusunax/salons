@@ -4,7 +4,7 @@ const buttonClickHandler = () => {};
 const selectChangeHandler = () => {};
 const checkboxChangeHandler = () => {};
 
-const locations = [
+const locations: string[] = [
   "강남",
   "건대",
   "구의",
@@ -23,7 +23,7 @@ const locations = [
   "홍대",
 ];
 
-const days = [
+const days: string[] = [
   "월요일",
   "화요일",
   "수요일",
