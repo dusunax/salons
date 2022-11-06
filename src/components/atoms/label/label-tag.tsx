@@ -1,6 +1,14 @@
 import styled from "@emotion/styled";
 
-const LabelTag = ({ tag, categoryColor }) => {
+import { Tag } from "../../../models/modules";
+
+const LabelTag = ({
+  tag,
+  categoryColor,
+}: {
+  tag: Tag;
+  categoryColor: string;
+}) => {
   const tagText = tag.text;
   const tagColor = tag.color ? tag.color : categoryColor;
 
@@ -9,7 +17,7 @@ const LabelTag = ({ tag, categoryColor }) => {
 
 export default LabelTag;
 
-const StLabelTag = styled.div`
+const StLabelTag = styled.div<{ tagColor: string }>`
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
 

@@ -20,7 +20,8 @@
     "**/*.ts",
     "**/*.tsx",
     "src/utils/category.js",
-    "src/utils/meetupFilter.js"
+    "src/utils/meetupFilter.js",
+    "src/components/atoms/label/label-category.jsx"
   ],
   "exclude": ["node_modules"]
 }

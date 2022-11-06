@@ -18,7 +18,7 @@ import commingSoonImage from "../../../public/banners/coming_soon_banner.jpg";
 const bannerData = {
   imageUrl: commingSoonImage.src,
   imageAlt: "오픈 예정 모임 알림 신청하기",
-  height: "3",
+  height: 3,
 };
 
 const sectionTitleData = {

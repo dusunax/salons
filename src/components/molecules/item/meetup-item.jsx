@@ -9,7 +9,7 @@ const MeetupItem = ({ meetup, filterTagList }) => {
 
   const salonCategory = tags.salonCategory[0];
   const selectedCategory = categoriesMap.get(salonCategory);
-
+  //
   const { name: categoryName, color, tag } = selectedCategory;
 
   const imageProps = { host, categoryName, color, sortStrings };

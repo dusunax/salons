@@ -10,6 +10,8 @@ const MeetupsFiltersCategories = ({ handlerProps, filterProps }) => {
     handlerProps;
   const { categories, filterSelected } = filterProps;
 
+  console.log(categories);
+
   return (
     <>
       <Categories

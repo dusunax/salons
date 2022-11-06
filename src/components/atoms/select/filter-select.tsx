@@ -1,6 +1,16 @@
 import styled from "@emotion/styled";
 
-const Filter = ({ content, selectChangeHandler, name, placeholder }) => {
+const Filter = ({
+  content,
+  selectChangeHandler,
+  name,
+  placeholder,
+}: {
+  content: [];
+  selectChangeHandler: () => void;
+  name: string;
+  placeholder: string;
+}) => {
   const filterList = content;
 
   return (

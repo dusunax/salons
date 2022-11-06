@@ -1,6 +1,18 @@
 import styled from "@emotion/styled";
 
-const ButtonCategory = (props) => {
+type Props = {
+  children: React.ReactNode;
+  color: string;
+  active: boolean;
+  dataCate: string;
+};
+
+type StButton = {
+  color: string;
+  active: boolean;
+};
+
+const ButtonCategory: React.FC<Props> = (props) => {
   return (
     <StButton
       color={props.color}
@@ -15,7 +27,7 @@ const ButtonCategory = (props) => {
 
 export default ButtonCategory;
 
-const StButton = styled.button`
+const StButton = styled.button<StButton>`
   padding: 0.4rem 0.7rem;
   margin-bottom: 0.3rem;
   border-radius: 0.5rem;

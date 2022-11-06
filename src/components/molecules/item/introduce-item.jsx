@@ -10,7 +10,7 @@ import { categoriesMap } from "../../../utils/category";
 const IntroduceItem = ({ introduce }) => {
   let { introduction, salonCategory, createdAt } = introduce;
   const categoryInfo = categoriesMap.get(salonCategory[0]);
-
+  //
   moment.locale("ko");
   let localeFromNow = moment(createdAt).fromNow();
 

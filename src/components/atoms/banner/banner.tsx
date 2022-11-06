@@ -1,7 +1,13 @@
 import styled from "@emotion/styled";
 
-const Banner = (props) => {
-  const { imageUrl, height } = props.bannerProps;
+type BannerData = {
+  imageUrl: string;
+  imageAlt: string;
+  height: number;
+};
+
+const Banner: React.FC<BannerData> = ({ ...bannerProps }) => {
+  const { imageUrl, height } = bannerProps;
 
   return (
     <StBanner
@@ -15,7 +21,7 @@ const Banner = (props) => {
 
 export default Banner;
 
-const StBanner = styled.div`
+const StBanner = styled.div<{ height: number; imageUrl: string }>`
   width: 100vw;
   height: ${(props) => props.height * 1.5 + "rem"};
   overflow: hidden;
