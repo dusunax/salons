@@ -13,6 +13,7 @@ import ContentsWrap from "../../components/templates/shared/contents-wrap";
 
 import commingSoonImage from "../../../public/banners/coming_soon_banner.jpg";
 
+// textContent
 const bannerData = {
   imageUrl: commingSoonImage.src,
   imageAlt: "오픈 예정 모임 알림 신청하기",
@@ -40,16 +41,29 @@ export default function SalonsPage() {
   const meetupsUList = useRef();
   const [listEmpty, setListEmpty] = useState(false);
 
-  const listOptionA = {
+  // 각 리스트 컴포넌트 config
+  const listOptionTop = {
     filterKeywords: ["closedMeetup"],
     filterSection: true,
   };
-  const listOptionB = {
+  const listOptionBottom = {
     filterKeywords: ["openMeetup"],
     filterSection: false,
     ...sectionMiddleData,
   };
 
+  /******************************/
+  /******* Meetups Fetch ********/
+  /******************************/
+
+  /** Meetups 리스트 fetch 핸들러 */
+  const fetchHandler = async () => {
+    const crruentList = await fetchMeetupsList();
+    const addSortList = await addSort(crruentList);
+    setMeetupsList(addSortList);
+  };
+
+  /** Meetups api get요청, return: Meetup[] */
   const fetchMeetupsList = async () => {
     try {
       let response = await fetch(API_URL + "/meetups").then((res) =>
@@ -66,7 +80,8 @@ export default function SalonsPage() {
     }
   };
 
-  const addFilter = (fetchedList) => {
+  /** 각 Meetup에 sort내용을 추가 */
+  const addSort = (fetchedList) => {
     for (const x in fetchedList) {
       let sortTags;
       let sortStrings = [];
@@ -83,12 +98,7 @@ export default function SalonsPage() {
     return fetchedList;
   };
 
-  const fetchHandler = async () => {
-    const crruentList = await fetchMeetupsList();
-    const addFilterList = await addFilter(crruentList);
-    setMeetupsList(addFilterList);
-  };
-
+  /** 카테고리 state 기본값 설정 */
   const getCategories = useCallback(() => {
     let cateLists = [
       {
@@ -107,15 +117,11 @@ export default function SalonsPage() {
     setCategories(cateLists);
   }, [categoriesMap]);
 
-  const buttonClickHandler = (e) => {
-    const target = e.target.closest("button");
+  /***************************/
+  /******* 필터링 기능 ********/
+  /***************************/
 
-    if (target) {
-      const cate = target.dataset.cate;
-      filterControl(cate);
-    }
-  };
-
+  /** 카테고리 state 변경되는 곳 */
   const filterControl = (cate) => {
     const newList = [...categories];
     let allActives = newList[0].active;
@@ -136,6 +142,9 @@ export default function SalonsPage() {
     }
   };
 
+  // 핸들러 //
+
+  /** onChange: 위치&요일 select  */
   const selectChangeHandler = (e) => {
     if (e.target.name === "locations") {
       setFilterSelected({ ...filterSelected, location: e.target.value });
@@ -144,10 +153,22 @@ export default function SalonsPage() {
     }
   };
 
+  /** onChange: 마감 모임 제외 checkbox  */
   const checkboxChangeHandler = (e) => {
     setFilterSelected({ ...filterSelected, closed: e.target.checked });
   };
 
+  /** onClick: 카테고리 버튼 클릭 */
+  const buttonClickHandler = (e) => {
+    const target = e.target.closest("button");
+
+    if (target) {
+      const cate = target.dataset.cate;
+      filterControl(cate);
+    }
+  };
+
+  /** ref 리스트의 아이템 갯수 확인(사용x) */
   const checkItemsLength = () => {
     if (meetupsUList.current.children.length === 0) {
       setListEmpty(true);
@@ -156,6 +177,7 @@ export default function SalonsPage() {
     }
   };
 
+  // 전달할 props객체
   const handlerProps = {
     checkboxChangeHandler,
     selectChangeHandler,
@@ -190,7 +212,7 @@ export default function SalonsPage() {
 
         {/* 모집 중인 모임 */}
         <SectionMeetupsList
-          listOption={listOptionA}
+          listOption={listOptionTop}
           meetupsList={meetupsList}
           handlerProps={handlerProps}
           filterProps={filterProps}
@@ -198,7 +220,7 @@ export default function SalonsPage() {
 
         {/* 진행 중인 모임 */}
         <SectionMeetupsList
-          listOption={listOptionB}
+          listOption={listOptionBottom}
           meetupsList={meetupsList}
           handlerProps={handlerProps}
           filterProps={filterProps}

@@ -38,4 +38,6 @@ const StButton = styled.button`
       color: #fff !important;
     }
   }
+
+  cursor: pointer;
 `;
