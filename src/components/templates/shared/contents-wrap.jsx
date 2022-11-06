@@ -15,6 +15,7 @@ export default ContentsWrap;
 const StContentsWrap = styled.div`
   width: 100%;
   max-width: 1024px;
+  min-height: calc(100vh - 5rem - 7rem);
 
   margin: 0 auto;
   padding: 0 2rem;

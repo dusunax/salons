@@ -1,12 +1,17 @@
-import { memo } from "react";
+import { memo, useEffect, useLayoutEffect } from "react";
 
 import styled from "@emotion/styled";
 
 import MeetupItem from "../../molecules/item/meetup-item";
 
-const MeetupsList = ({ meetupsList, sortOpt, filterProps, hasFilter }) => {
-  const meetups = meetupsList;
-  const { categories, filterSelected, meetupsUList, listEmpty } = filterProps;
+const MeetupsList = ({
+  meetupsList,
+  sortOpt,
+  filterProps,
+  hasFilter,
+  hasPagenation,
+}) => {
+  const { categories, filterSelected, listRef, itemEndRef } = filterProps;
 
   const isSortedItem = (sortOpt, meetup) => {
     if (sortOpt) {
@@ -80,8 +85,8 @@ const MeetupsList = ({ meetupsList, sortOpt, filterProps, hasFilter }) => {
   };
 
   return (
-    <StUList ref={meetupsUList}>
-      {meetups?.map((meetup) => {
+    <StUList ref={hasPagenation ? listRef : null}>
+      {meetupsList?.map((meetup) => {
         if (isSortedItem(sortOpt, meetup)) return;
 
         if (hasFilter) {
@@ -89,7 +94,6 @@ const MeetupsList = ({ meetupsList, sortOpt, filterProps, hasFilter }) => {
           if (isFilterClosed(filterSelected, meetup)) return;
           if (isFilteredCategory(categories, meetup)) return;
         }
-
         const filterTagList = meetup.filter;
 
         return (
@@ -104,7 +108,7 @@ const MeetupsList = ({ meetupsList, sortOpt, filterProps, hasFilter }) => {
   );
 };
 
-export default memo(MeetupsList);
+export default MeetupsList;
 
 const StUList = styled.ul`
   min-height: 10rem;

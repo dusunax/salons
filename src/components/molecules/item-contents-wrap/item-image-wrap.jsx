@@ -17,11 +17,11 @@ import with_text from "../../../../public/icons/with_text.svg";
 const ItemImageWrap = ({ imageProps, filterTagList }) => {
   const { host, categoryName, color, sortStrings } = imageProps;
 
-  const imageUrl = host.profileImageUrl;
-  const imageAlt = host.introduction;
-  const hasBanner = host.title !== null;
-  const name = host.nickname;
-  const intro = host.title;
+  const imageUrl = host?.profileImageUrl;
+  const imageAlt = host?.introduction;
+  const hasBanner = host?.title !== null;
+  const name = host?.nickname;
+  const intro = host?.title;
 
   const isclosed = sortStrings.includes("모집 마감");
 
