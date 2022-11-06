@@ -214,11 +214,20 @@ export default function SalonsPage() {
     }
   };
 
+  // 임시 버튼(페이지네이션)
+  let page = 0;
+  const showMoreButtonClickHandler = () => {
+    page++;
+    console.log(meetupsList);
+    fetchHandler(meetupsList, setMeetupsList);
+  };
+
   // 전달할 props객체
   const handlerProps = {
     checkboxChangeHandler,
     selectChangeHandler,
     buttonClickHandler,
+    showMoreButtonClickHandler,
   };
 
   const filterProps = {
@@ -272,19 +281,18 @@ export default function SalonsPage() {
   }, 500);
 
   useEffect(() => {
-    if (!(meetupsListTop.current.children.length > 0))
-      fetchHandler(meetupsList, setMeetupsList);
+    if (page === 0) fetchHandler(meetupsList, setMeetupsList);
     setDefaultCategories();
 
-    if (meetupsListTop.current !== null) {
-      window.addEventListener("scroll", () =>
-        _scrollHandler(meetupsListTop, isListEnd)
-      );
-      return () =>
-        window.removeEventListener("scroll", () =>
-          _scrollHandler(meetupsListTop, isListEnd)
-        );
-    }
+    // if (meetupsListTop.current !== null) {
+    //   window.addEventListener("scroll", () =>
+    //     _scrollHandler(meetupsListTop, isListEnd)
+    //   );
+    //   return () =>
+    //     window.removeEventListener("scroll", () =>
+    //       _scrollHandler(meetupsListTop, isListEnd)
+    //     );
+    // }
   }, []);
 
   return (
@@ -310,12 +318,12 @@ export default function SalonsPage() {
         />
 
         {/* 진행 중인 모임 */}
-        {/* <SectionMeetupsList
+        <SectionMeetupsList
           listOption={listOptionBottom}
           meetupsList={meetupsList}
           handlerProps={handlerProps}
           filterProps={filterProps}
-        /> */}
+        />
       </ContentsWrap>
     </div>
   );

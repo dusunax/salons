@@ -1,5 +1,3 @@
-import { memo, useEffect, useLayoutEffect } from "react";
-
 import styled from "@emotion/styled";
 
 import MeetupItem from "../../molecules/item/meetup-item";
@@ -10,6 +8,7 @@ const MeetupsList = ({
   filterProps,
   hasFilter,
   hasPagenation,
+  showMoreButtonClickHandler,
 }) => {
   const { categories, filterSelected, listRef, itemEndRef } = filterProps;
 
@@ -104,6 +103,18 @@ const MeetupsList = ({
           />
         );
       })}
+
+      {/* 임시버튼 */}
+      {hasPagenation && categories[0]?.active ? (
+        <button
+          className="show_more_button"
+          onClick={showMoreButtonClickHandler}
+        >
+          〉
+        </button>
+      ) : (
+        ""
+      )}
     </StUList>
   );
 };
@@ -130,5 +141,19 @@ const StUList = styled.ul`
     color: #aaa;
 
     font-size: 11px;
+  }
+
+  .show_more_button {
+    display: block;
+    min-height: 5rem;
+    border-radius: 0.2rem;
+
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+
+    border: none;
+
+    opacity: 0.7;
+    cursor: pointer;
   }
 `;

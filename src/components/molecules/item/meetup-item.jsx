@@ -7,6 +7,8 @@ import { categoriesMap } from "../../../utils/category";
 const MeetupItem = ({ meetup, filterTagList }) => {
   const { title, host, tags, sessions, sortStrings } = meetup;
 
+  if (tags.salonCategory === undefined) return;
+
   const salonCategory = tags.salonCategory[0];
   const selectedCategory = categoriesMap.get(salonCategory);
   //
