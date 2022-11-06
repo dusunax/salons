@@ -5,10 +5,21 @@ import styled from "@emotion/styled";
 import Filters from "../../molecules/filters/filters";
 import Categories from "../../molecules/categories/categories";
 
-const MeetupsFiltersCategories = ({ handlerProps, filterProps }) => {
+import { Category } from "../../../models/category";
+import { filterSelected } from "../../../models/modules";
+
+const MeetupsFiltersCategories = ({
+  handlerProps,
+  filterProps,
+}: {
+  handlerProps;
+  filterProps: { categories: Category[]; filterSelected: filterSelected };
+}) => {
   const { checkboxChangeHandler, selectChangeHandler, buttonClickHandler } =
     handlerProps;
   const { categories, filterSelected } = filterProps;
+
+  console.log(filterSelected);
 
   return (
     <>

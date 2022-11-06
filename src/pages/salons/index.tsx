@@ -6,6 +6,9 @@ import { API_URL } from "../../config/index";
 import { filteringMeetup } from "../../utils/meetupFilter";
 import { categoriesMap } from "../../utils/category";
 
+import { filterSelected } from "../../models/modules";
+import Category from "../../models/category";
+
 import SectionMeetupsList from "../../components/organisms/section/section-meetups-list";
 import SectionIntroduce from "../../components/organisms/section/section-introduces";
 import SectionTitle from "../../components/molecules/titles/section-title";
@@ -94,7 +97,7 @@ export default function SalonsPage() {
   };
 
   /** Meetups api get요청, return: Meetup[] */
-  const fetchMeetupsList = async (offset) => {
+  const fetchMeetupsList = async (offset: number) => {
     const api = `${API_URL}/meetups?offset=${offset}`;
 
     try {
@@ -154,7 +157,7 @@ export default function SalonsPage() {
   /***************************/
 
   /** 카테고리 state 변경되는 곳 */
-  const filterControl = (cate) => {
+  const filterControl = (cate: string) => {
     const newList = [...categories];
     let allActives = newList[0].active;
 
@@ -222,14 +225,25 @@ export default function SalonsPage() {
   };
 
   // 전달할 props객체
-  const handlerProps = {
+  const handlerProps: {
+    checkboxChangeHandler: (e: any) => void;
+    selectChangeHandler: (e: any) => void;
+    buttonClickHandler: (e: any) => void;
+    showMoreButtonClickHandler: () => void;
+  } = {
     checkboxChangeHandler,
     selectChangeHandler,
     buttonClickHandler,
     showMoreButtonClickHandler,
   };
 
-  const filterProps = {
+  const filterProps: {
+    categories: Category[];
+    filterSelected: filterSelected;
+    listRef;
+    itemEndRef;
+    isListEmpty: boolean;
+  } = {
     categories,
     filterSelected,
     listRef: meetupsListTop,

@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
 
-import React from "react";
+type Props = {
+  children: React.ReactNode;
+};
 
-const ContentsWrap = (props) => {
+const ContentsWrap: React.FC<Props> = (props) => {
   return (
     <StContentsWrap>
       <div>{props.children}</div>

@@ -1,4 +1,10 @@
-const categoriesArray = [
+const categoriesArray: {
+  name: string;
+  tag: string;
+  category: string;
+  salonCategory: string;
+  color: string;
+}[] = [
   {
     name: "love",
     tag: "TagLove",

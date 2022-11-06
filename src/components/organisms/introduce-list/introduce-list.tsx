@@ -2,9 +2,15 @@ import styled from "@emotion/styled";
 
 import IntroduceItem from "../../molecules/item/introduce-item";
 
-const IntroduceList = (props) => {
-  const { introduceList, showAtOnce } = props;
+import { Introduce } from "../../../models/modules";
 
+const IntroduceList = ({
+  introduceList,
+  showAtOnce,
+}: {
+  introduceList: Introduce[];
+  showAtOnce: number;
+}) => {
   return (
     <StIntroduceList>
       {introduceList.map((introduce, idx) => {
