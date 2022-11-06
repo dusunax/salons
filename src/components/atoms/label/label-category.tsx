@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
 import * as tagIcons from "../../../../public/icons/TagIcons";
 
+import { Category } from "../../../models/category";
+
 const LabelCategory = ({ category }) => {
   if (!category) return;
-  const { tag, salonCategory, color = "#111" } = category;
+  const { tag, salonCategory, color = "#111" }: Category = category;
 
   return (
     <StLabel fillColor={color}>
@@ -15,7 +17,7 @@ const LabelCategory = ({ category }) => {
 
 export default LabelCategory;
 
-const StLabel = styled.div`
+const StLabel = styled.div<{ fillColor: string }>`
   display: flex;
   align-items: center;
   gap: 6px;

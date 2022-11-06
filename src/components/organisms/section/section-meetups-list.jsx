@@ -8,9 +8,11 @@ const SectionMeetups = ({
   handlerProps,
   filterProps,
 }) => {
+  const hasPagenation = listOption.pagenation;
   const hasFilter = listOption.filterSection;
   const hasTitle = listOption.title !== undefined;
   const sortOpt = listOption.filterKeywords[0];
+  const { showMoreButtonClickHandler } = handlerProps;
 
   return (
     <section>
@@ -28,6 +30,8 @@ const SectionMeetups = ({
         sortOpt={sortOpt}
         filterProps={filterProps}
         hasFilter={hasFilter}
+        hasPagenation={hasPagenation}
+        showMoreButtonClickHandler={showMoreButtonClickHandler}
       />
     </section>
   );

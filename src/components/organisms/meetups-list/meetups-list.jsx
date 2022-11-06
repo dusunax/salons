@@ -1,12 +1,16 @@
-import { memo } from "react";
-
 import styled from "@emotion/styled";
 
 import MeetupItem from "../../molecules/item/meetup-item";
 
-const MeetupsList = ({ meetupsList, sortOpt, filterProps, hasFilter }) => {
-  const meetups = meetupsList;
-  const { categories, filterSelected, meetupsUList, listEmpty } = filterProps;
+const MeetupsList = ({
+  meetupsList,
+  sortOpt,
+  filterProps,
+  hasFilter,
+  hasPagenation,
+  showMoreButtonClickHandler,
+}) => {
+  const { categories, filterSelected, listRef, itemEndRef } = filterProps;
 
   const isSortedItem = (sortOpt, meetup) => {
     if (sortOpt) {
@@ -80,8 +84,8 @@ const MeetupsList = ({ meetupsList, sortOpt, filterProps, hasFilter }) => {
   };
 
   return (
-    <StUList ref={meetupsUList}>
-      {meetups?.map((meetup) => {
+    <StUList ref={hasPagenation ? listRef : null}>
+      {meetupsList?.map((meetup) => {
         if (isSortedItem(sortOpt, meetup)) return;
 
         if (hasFilter) {
@@ -89,7 +93,6 @@ const MeetupsList = ({ meetupsList, sortOpt, filterProps, hasFilter }) => {
           if (isFilterClosed(filterSelected, meetup)) return;
           if (isFilteredCategory(categories, meetup)) return;
         }
-
         const filterTagList = meetup.filter;
 
         return (
@@ -100,11 +103,23 @@ const MeetupsList = ({ meetupsList, sortOpt, filterProps, hasFilter }) => {
           />
         );
       })}
+
+      {/* 임시버튼 */}
+      {hasPagenation && categories[0]?.active ? (
+        <button
+          className="show_more_button"
+          onClick={showMoreButtonClickHandler}
+        >
+          〉
+        </button>
+      ) : (
+        ""
+      )}
     </StUList>
   );
 };
 
-export default memo(MeetupsList);
+export default MeetupsList;
 
 const StUList = styled.ul`
   min-height: 10rem;
@@ -126,5 +141,19 @@ const StUList = styled.ul`
     color: #aaa;
 
     font-size: 11px;
+  }
+
+  .show_more_button {
+    display: block;
+    min-height: 5rem;
+    border-radius: 0.2rem;
+
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+
+    border: none;
+
+    opacity: 0.7;
+    cursor: pointer;
   }
 `;

@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Router from "next/router";
+import ContentsWrap from "../components/templates/shared/contents-wrap";
 
 export default function HomePage() {
   return (
@@ -83,7 +84,7 @@ export default function HomePage() {
           href="/favicon/favicon-16x16.png"
         />
       </Head>
-      HomePage
+      <ContentsWrap>HomePage</ContentsWrap>
     </div>
   );
 }

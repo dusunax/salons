@@ -51,6 +51,8 @@ const StFilterContainer = styled.div`
   label {
     position: relative;
 
+    cursor: pointer;
+
     ::after {
       content: "✔";
       position: absolute;
