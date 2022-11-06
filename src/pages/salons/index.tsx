@@ -44,7 +44,6 @@ export default function SalonsPage() {
   // 무한스크롤
   const meetupsListTop = useRef();
   const meetupEnd = useRef();
-  const [isListEnd, setIsListEnd] = useState(false);
 
   // 그 외
   const [isListEmpty, setisListEmpty] = useState(false);
@@ -239,22 +238,22 @@ export default function SalonsPage() {
   };
 
   /** 마지막 아이템에 ref적용 */
-  const setLastItemRef = (listRef, itemEndRef) => {
-    const targets = listRef?.current.children;
-    console.log(targets === false);
+  // const setLastItemRef = (listRef, itemEndRef) => {
+  //   const targets = listRef?.current.children;
+  //   console.log(targets === false);
 
-    if (targets.length === 0) {
-      console.log("hi");
-    } else {
-      const lastIdx = targets.length - 1;
-      const lastItem = targets[lastIdx];
+  //   if (targets.length === 0) {
+  //     console.log("hi");
+  //   } else {
+  //     const lastIdx = targets.length - 1;
+  //     const lastItem = targets[lastIdx];
 
-      console.log(itemEndRef.current);
+  //     console.log(itemEndRef.current);
 
-      console.log(lastItem?.classList);
-      console.log(listRef.current.children, lastIdx, lastItem);
-    }
-  };
+  //     console.log(lastItem?.classList);
+  //     console.log(listRef.current.children, lastIdx, lastItem);
+  //   }
+  // };
 
   /**  */
   const _scrollHandler = _.throttle((ref, isListEnd) => {
@@ -307,7 +306,7 @@ export default function SalonsPage() {
         <SectionTitle titleProps={sectionTitleData} />
 
         {/* 자기소개 */}
-        {/* <SectionIntroduce /> */}
+        <SectionIntroduce />
 
         {/* 모집 중인 모임 */}
         <SectionMeetupsList

@@ -19,7 +19,7 @@ const IntroduceItem = ({ introduce }) => {
       <div className="wrap">
         <div className="top">
           <LabelCategory category={categoryInfo} />
-          <span>{localeFromNow}</span>
+          <span className="createdAt">{localeFromNow}</span>
         </div>
         <p>{introduction}</p>
       </div>
@@ -32,12 +32,19 @@ export default IntroduceItem;
 const StIntroduceItem = styled.li`
   flex: 0 0 calc(((100% - (1rem * 3)) / 4));
 
-  @media (max-width: 700px) {
+  @media (max-width: 800px) {
     flex: 0 0 calc((100% - (1rem * 2)) / 3);
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 500px) {
     flex: 0 0 calc((100% - (1rem)) / 2);
+    .createdAt {
+      width: 100%;
+      text-align: right;
+    }
+    .wrap {
+      height: 12rem !important;
+    }
   }
 
   @media (max-width: 320px) {
@@ -58,6 +65,11 @@ const StIntroduceItem = styled.li`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    gap: 2px;
+
+    flex-wrap: wrap;
+    word-break: keep-all;
   }
 
   span {
@@ -73,6 +85,7 @@ const StIntroduceItem = styled.li`
     color: #111;
 
     overflow: hidden;
+    word-break: keep-all;
     word-wrap: break-word;
     text-overflow: ellipsis;
 
